@@ -1,35 +1,29 @@
 # Databricks notebook source
-# Extract the data from stock_data
+from pyspark.sql import SparkSession
+import urllib.request
 
-table_name = "stock_data"
-table_path = "hive_metastore.default.stock_data"
-data = spark.table(table_path)
+# Download the csv from GitHub and save it to DBFS
+urllib.request.urlretrieve("https://raw.githubusercontent.com/mkeohane01/Project3-DatabricksETL/main/data/stock_data_DJIA.csv", "/dbfs/tmp/stock_data_DJIA.csv")
 
-# Show the first 10 rows of the table
-data.show(10)
-
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC -- Transform using SQL and then Load in to Delta Lake table yearlystocks_delta
-# MAGIC -- Grouping the data by year and averaging the monthly stock prices
-# MAGIC CREATE TABLE
-# MAGIC yearlystocks_delta
-# MAGIC USING DELTA
-# MAGIC SELECT 
-# MAGIC   year(date) AS year, 
-# MAGIC   ROUND(AVG(real),2) AS avg_real, 
-# MAGIC   ROUND(AVG(nominal),2) AS avg_nominal
-# MAGIC FROM 
-# MAGIC   stock_data 
-# MAGIC GROUP BY 
-# MAGIC   year(date)
-# MAGIC ORDER BY
-# MAGIC   year
-# MAGIC
+# initialize spark session
+spark = SparkSession.builder \
+        .appName("ETL Project 3") \
+        .getOrCreate()
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC use catalog `hive_metastore`; select * from `default`.`yearlystocks_delta` limit 100;
+# Read in the data from the csv
+df = spark.read \
+    .format("csv") \
+    .option("header", "true") \
+    .option("inferSchema", "true")  \
+    .option("delimiter", ",") \
+    .load("/tmp/stock_data_DJIA.csv")
+
+# COMMAND ----------
+
+# Create New Database
+spark.sql("CREATE DATABASE IF NOT EXISTS stocks_database")
+
+# write df to table
+df.write.format("delta").mode("overwrite").saveAsTable("stocks_database.DJIA_stock")
