@@ -23,4 +23,4 @@ jobs:
         -H "Authorization: Bearer $DATABRICKS_TOKEN" \
         -H "Content-Type: application/json" \
         -d '{"job_id": $JOB_ID}' \
-        "https://$DATABRICKS_HOST/api/2.0/jobs/run-now"
+        "$DATABRICKS_HOST/api/2.0/jobs/run-now"
