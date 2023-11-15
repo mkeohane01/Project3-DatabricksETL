@@ -20,7 +20,8 @@ jobs:
         JOB_ID: ${{ secrets.DATABRICKS_JOBID}}
       run: |
         RESPONSE=$(curl -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
-                       "$DATABRICKS_HOST/api/2.0/jobs/run-now" \
-                       -d "{\"job_id\": $JOB_ID}")
+        -v "$DATABRICKS_HOST/api/2.0/jobs/run-now" \
+        -d "{\"job_id\": $JOB_ID}")
+        
         echo "Response from Databricks API:"
         echo "$RESPONSE"
