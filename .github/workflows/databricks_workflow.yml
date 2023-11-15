@@ -16,8 +16,8 @@ jobs:
     - name: Trigger Databricks Job
       env:
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        DATABRICKS_HOST: 'https://adb-7746962439804367.7.azuredatabricks.net/?o=7746962439804367#notebook/23424899253134/command/2236591595819375'
-        JOB_ID: '356873846764198'
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST}}
+        JOB_ID: ${{ secrets.DATABRICKS_JOBID}}
       run: |
         curl -X POST -H "Authorization: Bearer $DATABRICKS_TOKEN" \
              "$DATABRICKS_HOST/api/2.0/jobs/run-now" \

@@ -1,0 +1,7 @@
+black
+pytest
+ruff
+pylint
+
+matplotlib
+pyspark
