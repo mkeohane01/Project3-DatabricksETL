@@ -43,8 +43,8 @@ ax2.set(xlabel='Date', ylabel='Real:Nominal Stock Price Ratio',
        title='Dow Jones Stock- Real:Nominal Ratio')
 ax2.grid()
 
-fig1.savefig('../figs/yearlystockprice.png')
-fig2.savefig('../figs/stockratio.png')
+# fig1.savefig('../figs/yearlystockprice.png')
+# fig2.savefig('../figs/stockratio.png')
 
 # COMMAND ----------
 
