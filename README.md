@@ -1,56 +1,43 @@
 # Project3-DatabricksETL: Dow Jones Industrial Average Data Analysis
 
+[![Run Databricks Workflow](https://github.com/mkeohane01/Project3-DatabricksETL/actions/workflows/databricks_workflow.yml/badge.svg)](https://github.com/mkeohane01/Project3-DatabricksETL/actions/workflows/databricks_workflow.yml)
+
+[![Continuous Integration](https://github.com/mkeohane01/Project3-DatabricksETL/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/mkeohane01/Project3-DatabricksETL/actions/workflows/continuous_integration.yml)
+
 ## Introduction
 
-This project is dedicated to performing extensive data analysis on the Dow Jones Industrial Average (DJIA) stock prices. Utilizing advanced data processing and analysis techniques, we aim to uncover valuable insights that can guide investment strategies and market understanding.
+This project is dedicated to performing data analysis on the Dow Jones Industrial Average (DJIA) stock prices utlizing Databricks. Through Databricks notebooks, I was able to perform Extract Transform Load (ETL) operations using Delta Lake data lakehouse storage. Delta Lake is very helpful because of the metadata layer which gives access to ACID properites (Atomicity, Consistency, Isolation, and Durability) and revisioning history that traditional Data Lakes dont support.
 
 ## Features
 
-- **Data Extraction**: Automating the process of extracting DJIA stock data from reliable sources.
-- **Data Transformation**: Cleaning and transforming the data for efficient analysis.
-- **Data Loading**: Storing the transformed data in a suitable format for easy access and analysis.
-- **Data Analysis**: Implementing various statistical and machine learning techniques to analyze the stock data.
-- **Visualization**: Creating intuitive visualizations to represent the findings from the data.
+- **Data Extraction**: Extracting DJIA stock data (both real and nominal) over last 100 years from csv and saving in a Delta Lake database.
+    - ETL-notebooks/Extract
+- **Data Transformation**: Transforming the data using Spark SQL to get yearly data as well as finding ratio of real and nominal values.
+    - ETL-notebooks/TransformLoad
+- **Data Loading**: Storing the transformed data in a new table in the Delta Lake database.
+    - ETL-notebooks/TransformLoad
+- **Data Analysis/Visualization**: Loaded and Visualized the transformed data for analysis
+    - ETL-notebooks/QueryVisualize
 
-## Dependencies
+## Workflow Useage
 
-To run this project, you will need the following:
+- The ETL workflow job is ran automatically through calling Databricks API
+    - Manually run using:
+    ```bash 
+    make run-workflow
+    ```
+    - The job flow runs 3 files from the ETL-notebooks folder on the Databricks cluster: 
+        - Extract -> TransformLoad -> QueryVisualize
+- Project dependencies can be found in requirements.txt
 
-- Python 3.x
-- Databricks Environment (or any other similar data processing environment)
-- Libraries: Pandas, NumPy, Matplotlib, Scikit-Learn (Ensure these are installed in your environment)
+## Visualizations
 
-## Installation and Running the Program
-
-1. Clone the repository:
-
-2. Navigate to the cloned directory.
-3. Install the required Python packages:
-4. Open the Databricks environment and upload the notebook files.
-5. Run each notebook in sequence as instructed within each file.
-
-## Usage
-
-- Each notebook is structured to guide you through different stages of the ETL process and data analysis.
-- Modify the parameters as needed to fit your specific analysis requirements.
-- Visualizations can be altered for different perspectives on the data.
 
 ## Recommendations to Management
 
 Based on our analysis of the DJIA stock prices, we recommend the following to the management team:
 
-1. **Investment Focus**: Identify sectors showing consistent growth and propose focused investments in these areas.
-2. **Risk Management**: Use our risk assessment models to mitigate potential losses in volatile market conditions.
-3. **Trend Analysis**: Regularly update the models with the latest data to capture emerging trends in the market.
-4. **Data-Driven Decisions**: Emphasize the importance of data analytics in guiding investment strategies.
+1. **Safe Long Investment**: Stock price shows consistent growth over a long period of time for safe long term investment year by year.
+3. **Inflation Analysis**: We can also look at the real-to-nominal stock price ratio to analyze inflation. A higher real-to-nominal stock price ratio indicates that inflation has been low, preserving the purchasing power of stock investments, whereas a lower ratio suggests higher inflation, eroding the real value and purchasing power of these investments. In this case it is relatively steady but we can see that the purchasing power has generally decreased over time.
 
-## Conclusion
-
-This project provides a comprehensive toolkit for analyzing the Dow Jones Industrial Average stock prices. By leveraging these tools and methodologies, organizations can make informed decisions, maximizing returns and minimizing risks in the stock market.
-
-## Contact
-
-For any queries or contributions, please contact:
-
-- [Your Name]
-- [Your Contact Information]
+In conclusion, I recommending heavily investing in Dow Jones Industral Average to have a very save investment with clear returns which will fight inflation more than a bank or other savings.

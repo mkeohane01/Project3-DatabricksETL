@@ -10,3 +10,6 @@ format:
 
 lint:
 	ruff ETL-notebooks
+
+run-workflow:
+	python main.py
