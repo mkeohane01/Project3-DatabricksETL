@@ -13,10 +13,13 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
 
+    - name: Install packages
+      run: make install
+
     - name: Trigger Databricks Job
       env:
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        DATABRICKS_KEY: ${{ secrets.DATABRICKS_TOKEN }}
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST}}
-        JOB_ID: ${{ secrets.DATABRICKS_JOBID}}
+        DATABRICKS_JOBID: ${{ secrets.DATABRICKS_JOBID}}
       run: 
         make run-workflow

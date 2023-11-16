@@ -18,7 +18,8 @@ This project is dedicated to performing data analysis on the Dow Jones Industria
     - ETL-notebooks/TransformLoad
 - **Data Analysis/Visualization**: Loaded and Visualized the transformed data for analysis
     - ETL-notebooks/QueryVisualize
-
+- **Simple SQL**: Outside of the workflow, I also implemented a simple ETL using just SQL in the Databricks enviornment
+    - ETL-notebooks/ETL-SQL
 ## Workflow Useage
 
 - The ETL workflow job is ran automatically through calling Databricks API
