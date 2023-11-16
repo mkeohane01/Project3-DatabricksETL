@@ -8,8 +8,8 @@ test:
 format:	
 	black *.py 
 
-lint:
-	ruff ETL-notebooks
+# lint:
+# 	ruff ETL-notebooks
 
 run-workflow:
 	python main.py

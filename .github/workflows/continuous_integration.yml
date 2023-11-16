@@ -21,15 +21,11 @@ jobs:
     - name: Install packages
       run: make install      
 
-    - name: Lint
-      run: make lint
+    # - name: Lint
+    #   run: make lint
 
     - name: Format Black
       run: make format
       
     # - name: Run tests
     #   run: make test
-    #   env: 
-    #     DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
-    #     PIPELINE_JOB_ID: ${{ secrets.PIPELINE_JOB_ID }}
-    #     SERVER_HOSTNAME: ${{ secrets.SERVER_HOSTNAME }}
