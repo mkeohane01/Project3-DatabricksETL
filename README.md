@@ -33,12 +33,16 @@ This project is dedicated to performing data analysis on the Dow Jones Industria
 
 ## Visualizations
 
+Stock Price of Dow Jones Industrial Average per year:
+![Alt text](figs/yearlystockprice.png)
 
+Ratio of real and nominal stock prices over time:
+![Alt text](figs/stockratio.png)
 ## Recommendations to Management
 
 Based on our analysis of the DJIA stock prices, we recommend the following to the management team:
 
 1. **Safe Long Investment**: Stock price shows consistent growth over a long period of time for safe long term investment year by year.
-3. **Inflation Analysis**: We can also look at the real-to-nominal stock price ratio to analyze inflation. A higher real-to-nominal stock price ratio indicates that inflation has been low, preserving the purchasing power of stock investments, whereas a lower ratio suggests higher inflation, eroding the real value and purchasing power of these investments. In this case it is relatively steady but we can see that the purchasing power has generally decreased over time.
+3. **Inflation Analysis**: We can also look at the real-to-nominal stock price ratio to analyze inflation. A higher real-to-nominal stock price ratio indicates that inflation has been low, preserving the purchasing power of stock investments, whereas a lower ratio suggests higher inflation, eroding the real value and purchasing power of these investments. In this case we can see that the purchasing power has generally decreased over time.
 
 In conclusion, I recommending heavily investing in Dow Jones Industral Average to have a very save investment with clear returns which will fight inflation more than a bank or other savings.
