@@ -6,6 +6,8 @@
 
 ## Introduction
 
+Video Link to walkthrough can be found [here](https://youtu.be/u0P08hU6Zpo).
+
 This project is dedicated to performing data analysis on the Dow Jones Industrial Average (DJIA) stock prices utlizing Databricks. Through Databricks notebooks, I was able to perform Extract Transform Load (ETL) operations using Delta Lake data lakehouse storage. Delta Lake is very helpful because of the metadata layer which gives access to ACID properites (Atomicity, Consistency, Isolation, and Durability) and revisioning history that traditional Data Lakes dont support.
 
 ## Features
