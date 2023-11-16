@@ -2,6 +2,7 @@ import requests
 import json
 import dotenv
 import os
+import time
 
 def run_databricks_job(token, hosturl, jobid):  
     '''
@@ -22,7 +23,6 @@ def run_databricks_job(token, hosturl, jobid):
 
     # set up the API endpoint url
     api_url = f"https://{hosturl}/api/2.0/jobs/run-now"
-    print(api_url)
     # submit the job run
     response = requests.post(api_url, headers=headers, json=data, timeout=120)
 
@@ -32,15 +32,28 @@ def run_databricks_job(token, hosturl, jobid):
         run_id = response.json()['run_id']
         print(f'Successfully submitted job run with ID {run_id}')
 
-        # check job run result status
-        result_url = f'https://{hosturl}/api/2.0/jobs/runs/get?run_id={run_id}'
-        response = requests.get(result_url, headers=headers)
-        if response.status_code != 200:
-            print(f'Error getting job run result: {response.json()}')
-        else:
-            result_state = response.json()['state']['life_cycle_state']
-            print(f'Job run {run_id} completed with result state {result_state}')
-
+        while True:
+            # check job run result status
+            result_url = f'https://{hosturl}/api/2.0/jobs/runs/get?run_id={run_id}'
+            response = requests.get(result_url, headers=headers)
+            # error handling
+            if response.status_code != 200:
+                print(f'Error getting job run result: {response.json()}')
+                break
+            else:
+                state = response.json()['state']['life_cycle_state']
+                print(f"Job run {run_id} has state: {state}")
+                # when job is done print if successful or not
+                if state == "TERMINATED":
+                    result_state = response.json()["state"]["result_state"]
+                    if result_state == "SUCCESS":
+                        print(f"Job run {run_id} succeeded!")
+                        break
+                    else:
+                        print(f"Job run {run_id} failed with result state: {result_state}")
+                        break
+            time.sleep(4)
+                
 
 if __name__ == '__main__':
     # load personal access token from .env file
